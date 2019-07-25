@@ -17,6 +17,7 @@
 //playPause from player object
     song.element.on('click', event => {
         player.playPause(song);
+        $('button#play-pause').attr('playState', player.playState);
       });
 //add text from album, song's data, into HTML    
     $('#song-list').append(song.element);
