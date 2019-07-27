@@ -1,7 +1,7 @@
 {
 //Pause button -hidden-css, switch icon using playstate attribute
  $('button#play-pause').on('click', function(){
-     player.playPause(); 
+     helper.playPauseAndUpdate(); 
      $(this).attr('playState', player.playState);  
  });
 //Next button -create index for song currently playing create cont nextSong using current song +1 to for player to play.
@@ -14,7 +14,7 @@
 //fixes -no next song on the last #index
     if (nextSongIndex >= album.songs.length) 
      { return; }
-    player.playPause(nextSong);
+     helper.playPauseAndUpdate(nextSong);
 });
 
 //Previous button similar to Next, differs with song index of previous song limit is at -1. 
@@ -27,7 +27,7 @@ $('button#previous').on('click', function() {
 //fixes -no next song on the last #index
      if (previousSongIndex == -1) 
      { return; }
-     player.playPause(previousSong);
+     helper.playPauseAndUpdate(previousSong);
 });
 //Time control slider
 
@@ -46,6 +46,13 @@ setInterval( () => {
  $('#time-control .current-time').text(currentTime);
  $('#time-control input').val(percent);
 }, 1000);
+
+//Volume Control
+    $('#volume-control input').on( 'input', function (event){
+        console.log("before change: ", player.volume)
+        player.setVolume(event.target.value);
+        console.log("after change: ", player.volume)
+    });
 
 //end of bar controls
 }
