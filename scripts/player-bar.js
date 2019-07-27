@@ -29,4 +29,23 @@ $('button#previous').on('click', function() {
      { return; }
      player.playPause(previousSong);
 });
+//Time control slider
+
+//use .val target value
+ $('#time-control input').on('input', function (event) {
+  player.skipTo(event.target.value);
+ });
+
+//global setInterval works everywhere
+setInterval( () => {
+ if (player.playState !== 'playing') { return; } 
+//turn duration into % of song
+ const currentTime = player.getTime();
+ const duration = player.getDuration();
+ const percent = (currentTime / duration) * 100;
+ $('#time-control .current-time').text(currentTime);
+ $('#time-control input').val(percent);
+}, 1000);
+
+//end of bar controls
 }
